@@ -1,20 +1,17 @@
 package com.example.sami.labyrinthem2ihm;
-
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-
 import com.example.sami.labyrinthem2ihm.Models.Bille;
 import com.example.sami.labyrinthem2ihm.Models.Bloc;
-
 import java.util.List;
-
 public class LabyrintheView extends SurfaceView implements SurfaceHolder.Callback {
     Bille mBoule;
-
     public Bille getBoule() {
         return mBoule;
     }
@@ -27,7 +24,6 @@ public class LabyrintheView extends SurfaceView implements SurfaceHolder.Callbac
     DrawingThread mThread;
 
     private List<Bloc> mBlocks = null;
-
     public List<Bloc> getBlocks() {
         return mBlocks;
     }
@@ -53,11 +49,15 @@ public class LabyrintheView extends SurfaceView implements SurfaceHolder.Callbac
     @Override
     protected void onDraw(Canvas pCanvas) {
         // Dessiner le fond de l'écran en premier
-        pCanvas.drawColor(Color.CYAN);
-        if (mBlocks != null) {
+        Paint p=new Paint();
+        Bitmap btip=BitmapFactory.decodeResource(getResources(), R.drawable.bg);
+        p.setColor(Color.RED);
+        pCanvas.drawBitmap(btip, 0, 0, p);
+       // pCanvas.drawPicture() .drawColor(Color.WHITE);
+        if(mBlocks != null) {
             // Dessiner tous les blocs du labyrinthe
-            for (Bloc b : mBlocks) {
-                switch (b.getType()) {
+            for(Bloc b : mBlocks) {
+                switch(b.getType()) {
                     case DEPART:
                         mPaint.setColor(Color.WHITE);
                         break;
@@ -65,7 +65,7 @@ public class LabyrintheView extends SurfaceView implements SurfaceHolder.Callbac
                         mPaint.setColor(Color.RED);
                         break;
                     case TROU:
-                        mPaint.setColor(Color.BLACK);
+                        mPaint.setColor(Color.rgb(48,63,159));
                         break;
                 }
                 pCanvas.drawRect(b.getRectangle(), mPaint);
@@ -73,7 +73,8 @@ public class LabyrintheView extends SurfaceView implements SurfaceHolder.Callbac
         }
 
         // Dessiner la boule
-        if (mBoule != null) {
+        if(mBoule != null) {
+
             mPaint.setColor(mBoule.getCouleur());
             pCanvas.drawCircle(mBoule.getX(), mBoule.getY(), Bille.RAYON, mPaint);
         }
@@ -89,7 +90,7 @@ public class LabyrintheView extends SurfaceView implements SurfaceHolder.Callbac
         mThread.keepDrawing = true;
         mThread.start();
         // Quand on crée la boule, on lui indique les coordonnées de l'écran
-        if (mBoule != null) {
+        if(mBoule != null ) {
             this.mBoule.setHeight(getHeight());
             this.mBoule.setWidth(getWidth());
         }
@@ -103,15 +104,13 @@ public class LabyrintheView extends SurfaceView implements SurfaceHolder.Callbac
             try {
                 mThread.join();
                 retry = false;
-            } catch (InterruptedException e) {
-            }
+            } catch (InterruptedException e) {}
         }
 
     }
 
     private class DrawingThread extends Thread {
         boolean keepDrawing = true;
-
 
         @Override
         public void run() {
@@ -122,7 +121,7 @@ public class LabyrintheView extends SurfaceView implements SurfaceHolder.Callbac
                 try {
                     canvas = mSurfaceHolder.lockCanvas();
                     synchronized (mSurfaceHolder) {
-                       onDraw(canvas);
+                        onDraw(canvas);
                     }
                 } finally {
                     if (canvas != null)
@@ -132,8 +131,7 @@ public class LabyrintheView extends SurfaceView implements SurfaceHolder.Callbac
                 // Pour dessiner à 50 fps
                 try {
                     Thread.sleep(20);
-                } catch (InterruptedException e) {
-                }
+                } catch (InterruptedException e) {}
             }
         }
     }

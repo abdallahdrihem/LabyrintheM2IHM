@@ -5,7 +5,7 @@ import android.graphics.RectF;
 public class Bloc {
     public enum  Type { TROU, DEPART, ARRIVEE };
 
-    private float SIZE = Bille.RAYON * 2;
+    private float SIZE = Bille.RAYON * 4;
 
     private Type mType = null;
     private RectF mRectangle = null;

@@ -1,23 +1,25 @@
 package com.example.sami.labyrinthem2ihm.Models;
 
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.RectF;
+import com.example.sami.labyrinthem2ihm.R;
 
 public class Bille {
     // Rayon de la boule
-    public static final int RAYON = 10;
+    public static final int RAYON = 20;
 
     // Couleur de la boule
-    private int mCouleur = Color.GREEN;
+    private int mCouleur = Color.rgb(48,63,159);
     public int getCouleur() {
         return mCouleur;
     }
 
     // Vitesse maximale autorisée pour la boule
-    private static final float MAX_SPEED = 20.0f;
+    private static final float MAX_SPEED = 2.5f;
 
     // Permet à la boule d'accélérer moins vite
-    private static final float COMPENSATEUR = 8.0f;
+    private static final float COMPENSATEUR = 1.0f;
 
     // Utilisé pour compenser les rebonds
     private static final float REBOND = 1.75f;
@@ -97,7 +99,9 @@ public class Bille {
         this.mWidth = pWidth;
     }
 
+
     public Bille() {
+
         mRectangle = new RectF();
     }
 

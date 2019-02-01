@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         btnLevel2 = findViewById(R.id.btn_level2);
         btnLevel3 = findViewById(R.id.btn_level3);
 
-        btnLevel3.setOnClickListener(new View.OnClickListener() {
+        btnLevel1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, LevelsActivity.class);

@@ -3,6 +3,7 @@ package com.example.sami.labyrinthem2ihm;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -58,7 +59,7 @@ public class LevelsActivity extends AppCompatActivity {
             case VICTORY_DIALOG:
                 builder.setCancelable(false)
                         .setMessage("Bravo, vous avez gagné !")
-                        .setTitle("Champion ! Le roi des Zörglubienotchs est mort grâce à vous !")
+                        .setTitle("T'es un Champion :D !")
                         .setNeutralButton("Recommencer", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -71,8 +72,8 @@ public class LevelsActivity extends AppCompatActivity {
 
             case DEFEAT_DIALOG:
                 builder.setCancelable(false)
-                        .setMessage("La Terre a été détruite à cause de vos erreurs.")
-                        .setTitle("Bah bravo !")
+                        .setMessage("Réessaye encore une fois.")
+                        .setTitle("Oh Nooooo !")
                         .setNeutralButton("Recommencer", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
